@@ -28,6 +28,8 @@
 				<div style="width: {(usage / quota) * 100}%;" />
 			</div>
 		{/if}
+	{:catch}
+		<span class="alert red"><Fa icon={faXmarkCircle} /> Failed to Load Storage Estimate</span>
 	{/await}
 	<hr />
 	{#if $persistent}
