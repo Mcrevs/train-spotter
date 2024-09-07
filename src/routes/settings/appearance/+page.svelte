@@ -14,7 +14,7 @@
 		<Slider
 			bind:value={$padding}
 			icons={[faGripLinesVertical, faArrowsLeftRightToLine]}
-			props={{ max: 20, step: 2 }}
+			props={{ max: 30, step: 3 }}
 		/>
 	</label>
 </div>
