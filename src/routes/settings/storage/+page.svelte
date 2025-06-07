@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { faCheckCircle, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
-	import { spinner } from "$lib/components/Loading.svelte";
+	import { spinner } from "../../Loading.svelte";
 	import { persistent } from "$lib/pouchdb";
 	import pretty from "pretty-bytes";
 	import Fa from "svelte-fa";

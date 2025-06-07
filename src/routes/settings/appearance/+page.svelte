@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { faArrowsLeftRightToLine, faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
-	import { padding } from "$lib/components/Navbar.svelte";
 	import Slider from "$lib/components/Slider.svelte";
+	import { padding } from "../../Navbar.svelte";
 </script>
 
 <div class="container">

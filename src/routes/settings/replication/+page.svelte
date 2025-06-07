@@ -2,7 +2,7 @@
 	import ReplicationStatus from "$lib/components/ReplicationStatus.svelte";
 	import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 	import { connect, credentials, disconnect as close, status } from "$lib/pouchdb";
-	import { spinner } from "$lib/components/Loading.svelte";
+	import { spinner } from "../../Loading.svelte";
 	import Fa from "svelte-fa";
 
 	const { error } = status;
