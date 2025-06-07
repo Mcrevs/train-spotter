@@ -29,7 +29,7 @@
 	<div class="toast" role="alert">
 		<div class="message">
 			{#if $offlineReady}
-				<span>Spotter has been downloaded and is ready to work offline!</span>
+				<span>Spotter has been downloaded and is ready to use offline!</span>
 			{:else}
 				<span>A new Spotter version is available. Ensure all data is saved before updating.</span>
 			{/if}
@@ -48,7 +48,7 @@
 		bottom: 0;
 		margin: 16px;
 		padding: 12px;
-		border-radius: 4px;
+		border-radius: 10px;
 		z-index: 3;
 		text-align: left;
 		background-color: var(--bg-0);

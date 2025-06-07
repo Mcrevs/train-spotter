@@ -2,12 +2,12 @@
 	import "greset";
 	import "$lib/global.scss";
 
-	import Loading from "$lib/components/Loading.svelte";
-	import Backbar from "$lib/components/Backbar.svelte";
-	import Navbar from "$lib/components/Navbar.svelte";
 	import { pwaInfo } from "virtual:pwa-info";
 	import type { PageData } from "./$types";
 	import { fly } from "svelte/transition";
+	import Loading from "./Loading.svelte";
+	import Backbar from "./Backbar.svelte";
+	import Navbar from "./Navbar.svelte";
 
 	export let data: PageData;
 </script>
@@ -33,6 +33,6 @@
 	<meta name="apple-mobile-web-app-title" content="Spotter" />
 </svelte:head>
 
-{#await import("$lib/ServiceWorker.svelte") then { default: ServiceWorker }}
+{#await import("./ServiceWorker.svelte") then { default: ServiceWorker }}
 	<ServiceWorker />
 {/await}
