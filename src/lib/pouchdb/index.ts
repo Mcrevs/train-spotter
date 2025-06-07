@@ -9,10 +9,10 @@ export const db = new PouchDB("spotter", { auto_compaction: true });
 export function onChange(fn: () => void) {
 	let listener: PouchDB.Core.Changes<{}> | undefined;
 
-	onDestroy(() => listener?.cancel());
 	onMount(() => {
 		listener = db.changes({ live: true, since: "now" }).on("change", fn);
 		fn();
+		return () => listener?.cancel();
 	});
 }
 

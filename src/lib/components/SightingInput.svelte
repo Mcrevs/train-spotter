@@ -28,7 +28,7 @@
 		if (e.key == "ArrowUp" && i > 0) focus(i - 1);
 		else if (["Enter", "ArrowDown"].includes(e.key) && i < inputs.length - 1) focus(i + 1);
 		// Delete empty input when backspace pressed
-		else if (e.key == "Backspace" && inputs[i].value == "" && inputs.length > 1) {
+		else if (["Backspace", "Delete"].includes(e.key) && inputs[i].value == "" && inputs.length > 1) {
 			// If attempting to delete the last input, only allow if there are other empty inputs
 			if (i != inputs.length - 1 || inputs.filter((i) => i.value == "").length > 1)
 				inputs = [...inputs.slice(0, i), ...inputs.slice(i + 1, inputs.length)];
@@ -45,11 +45,12 @@
 		await db.bulkDocs(
 			inputs
 				.filter((i) => i.value != "")
-				.map((e, i) => ({
-					_id: (new Date().getTime() + i).toString(),
-					classification: e.value,
+				.map((e) => ({
+					time: new Date().getTime(),
+					identification: e.value,
 					location: $location,
 					type: "sighting",
+					_id: e.id,
 				})),
 		);
 

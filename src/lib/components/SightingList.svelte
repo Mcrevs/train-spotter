@@ -1,21 +1,20 @@
 <script lang="ts">
 	import type { SightingDoc } from "../pouchdb/types";
-	import { onChange } from "$lib/pouchdb";
-	import { db } from "$lib/pouchdb";
+	import { db, onChange } from "$lib/pouchdb";
 
 	let days: [string, SightingDoc[]][] = [];
 
 	onChange(async () => {
-		await db.createIndex({ index: { fields: ["type", "_id"] } });
+		await db.createIndex({ index: { fields: ["time", "type"] } });
 
 		const result = await db.find({
-			selector: { type: "sighting", _id: { $gte: null } },
-			sort: [{ _id: "desc" }],
+			selector: { type: "sighting", time: { $gte: null } },
+			sort: [{ time: "desc" }],
 		});
 
 		days = Object.entries(
 			Object.groupBy<number, SightingDoc>(result.docs, (i) => {
-				const day = new Date(Number(i._id));
+				const day = new Date(Number(i.time));
 				day.setHours(0);
 				day.setMinutes(0);
 				day.setSeconds(0);
@@ -38,7 +37,7 @@
 		<div class="heading">{day}</div>
 		{#each sightings as sighting}
 			<a class="sighting" href="/sightings/{sighting._id}">
-				<span>{sighting.classification}</span>
+				<span>{sighting.identification}</span>
 				<span class="location">{sighting.location}</span>
 			</a>
 		{/each}

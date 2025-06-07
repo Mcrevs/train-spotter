@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
-	import { faCog, faHome } from "@fortawesome/free-solid-svg-icons";
+	import { faCog, faHome, faListCheck } from "@fortawesome/free-solid-svg-icons";
 	import { persist } from "$lib/util";
 	import { page } from "$app/stores";
 	import Fa from "svelte-fa";
@@ -9,6 +9,7 @@
 
 	const entries: { href: string; label: string; icon: IconDefinition }[] = [
 		{ href: "/", label: "Home", icon: faHome },
+		{ href: "/sightings", label: "Sightings", icon: faListCheck },
 		{ href: "/settings", label: "Settings", icon: faCog },
 	];
 </script>

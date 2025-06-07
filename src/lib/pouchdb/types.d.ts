@@ -1,6 +1,7 @@
 /// <reference types="pouchdb-core" />
 
 export type SightingDoc = {
-	classification: string;
+	identification: string;
 	location: string;
+	time: number;
 } & Core.ExistingDocument;
