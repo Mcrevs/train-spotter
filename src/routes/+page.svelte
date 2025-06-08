@@ -7,4 +7,4 @@
 
 <hr />
 
-<SightingList />
+<SightingList limit={10} />

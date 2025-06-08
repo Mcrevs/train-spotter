@@ -2,6 +2,8 @@
 	import type { SightingDoc } from "../pouchdb/types";
 	import { db, onChange } from "$lib/pouchdb";
 
+	export let limit: number | null = null;
+
 	let days: [string, SightingDoc[]][] = [];
 
 	onChange(async () => {
@@ -10,6 +12,7 @@
 		const result = await db.find({
 			selector: { type: "sighting", time: { $gte: null } },
 			sort: [{ time: "desc" }],
+			...(limit && { limit }),
 		});
 
 		days = Object.entries(
