@@ -37,7 +37,7 @@
 
 <div class="list">
 	{#if days.length === 0}
-		<p class="center">No sightings found</p>
+		<p class="center margin-v">No sightings found</p>
 	{:else}
 		{#each days as [day, sightings]}
 			<div class="heading">{day}</div>

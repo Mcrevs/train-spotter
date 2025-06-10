@@ -144,3 +144,15 @@ span.alert {
 	@extend .flex;
 	flex-direction: row;
 }
+
+.margin {
+	margin: 10px;
+}
+
+.margin-v {
+	margin: 10px 0;
+}
+
+.margin-h {
+	margin: 0 10px;
+}
