@@ -30,6 +30,7 @@ main {
 hr {
 	margin: 20px 0;
 	color: #ffffff48;
+	margin: 10px 0;
 }
 
 input[type="text"],
@@ -121,4 +122,23 @@ span.alert {
 	svg {
 		color: var(--icon-color);
 	}
+}
+
+.center {
+	text-align: center;
+}
+
+.flex {
+	display: flex;
+	gap: 10px;
+}
+
+.flexcol {
+	@extend .flex;
+	flex-direction: column;
+}
+
+.flexrow {
+	@extend .flex;
+	flex-direction: row;
 }

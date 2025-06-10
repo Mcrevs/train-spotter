@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
-	import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
 	import { faCog, faHome, faListCheck } from "@fortawesome/free-solid-svg-icons";
+	import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 	import { persist } from "$lib/util";
 	import { page } from "$app/stores";
 	import Fa from "svelte-fa";

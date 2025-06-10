@@ -21,7 +21,7 @@
 	}
 </script>
 
-<div class="container">
+<div class="flexcol">
 	<h2>Replication Credentials</h2>
 	<p class="secondary">
 		CouchDB database connection credentials for backup and synchronising data between devices.
@@ -29,7 +29,7 @@
 	<ReplicationStatus mode="connection" />
 	<ReplicationStatus mode="sync" />
 	<hr />
-	<form class="container" on:submit|preventDefault={submit}>
+	<form class="flexcol" on:submit|preventDefault={submit}>
 		<label>
 			CouchDB Database Address:
 			<input required type="url" placeholder="https://example.com/spotter" bind:value={address} />
@@ -53,15 +53,3 @@
 		<span class="alert red"><Fa icon={faCircleExclamation} /> {$error}</span>
 	{/if}
 </div>
-
-<style lang="scss">
-	.container {
-		flex-direction: column;
-		display: flex;
-		gap: 10px;
-	}
-
-	hr {
-		margin: 10px 0;
-	}
-</style>

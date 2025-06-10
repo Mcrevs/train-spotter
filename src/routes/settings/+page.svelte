@@ -1,6 +1,12 @@
 <script lang="ts">
 	import ReplicationStatus from "$lib/components/ReplicationStatus.svelte";
-	import { faBoxArchive, faChevronRight, faPalette, faPlug } from "@fortawesome/free-solid-svg-icons";
+	import {
+		faBoxArchive,
+		faChevronRight,
+		faCube,
+		faPalette,
+		faPlug,
+	} from "@fortawesome/free-solid-svg-icons";
 	import { onMount } from "svelte";
 	import Fa from "svelte-fa";
 
@@ -11,26 +17,36 @@
 	});
 </script>
 
-<h1>Settings</h1>
-<hr />
-<div class="group">
-	<a href="/settings/replication">
-		<Fa icon={faPlug} />
-		<span class="title">Replication</span>
-		<span class="info"><ReplicationStatus mode="connection" icon={false} /></span>
-		<span class="chevron"><Fa icon={faChevronRight} /></span>
-	</a>
-	<a href="/settings/storage">
-		<Fa icon={faBoxArchive} />
-		<span class="title">Storage</span>
-		{#if storageUsage !== undefined}<span class="info">{storageUsage}% Used</span>{/if}
-		<span class="chevron"><Fa icon={faChevronRight} /></span>
-	</a>
-	<a href="/settings/appearance">
-		<Fa icon={faPalette} />
-		<span class="title">Appearance</span>
-		<span class="chevron"><Fa icon={faChevronRight} /></span>
-	</a>
+<div class="flexcol">
+	<h1>Settings</h1>
+	<hr />
+	<div class="group">
+		<a href="/settings/replication">
+			<Fa icon={faPlug} />
+			<span class="title">Replication</span>
+			<span class="info"><ReplicationStatus mode="connection" icon={false} /></span>
+			<span class="chevron"><Fa icon={faChevronRight} /></span>
+		</a>
+		<a href="/settings/storage">
+			<Fa icon={faBoxArchive} />
+			<span class="title">Storage</span>
+			{#if storageUsage !== undefined}<span class="info">{storageUsage}% Used</span>{/if}
+			<span class="chevron"><Fa icon={faChevronRight} /></span>
+		</a>
+		<a href="/settings/schema">
+			<Fa icon={faCube} />
+			<span class="title">Schema</span>
+			<span class="chevron"><Fa icon={faChevronRight} /></span>
+		</a>
+	</div>
+
+	<div class="group">
+		<a href="/settings/appearance">
+			<Fa icon={faPalette} />
+			<span class="title">Appearance</span>
+			<span class="chevron"><Fa icon={faChevronRight} /></span>
+		</a>
+	</div>
 </div>
 
 <style lang="scss">

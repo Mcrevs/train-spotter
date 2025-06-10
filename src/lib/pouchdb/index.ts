@@ -1,13 +1,14 @@
 import { derived, writable, type Readable, type Writable } from "svelte/store";
 import { gettable, persist, sleep } from "$lib/util";
 import { onMount, onDestroy } from "svelte";
+import type { AnyDoc } from "./types";
 import "./pouchdb";
 import "./pouchdb.find";
 
-export const db = new PouchDB("spotter", { auto_compaction: true });
+export const db = new PouchDB<AnyDoc>("spotter", { auto_compaction: true });
 
 export function onChange(fn: () => void) {
-	let listener: PouchDB.Core.Changes<{}> | undefined;
+	let listener: PouchDB.Core.Changes<AnyDoc> | undefined;
 
 	onMount(() => {
 		listener = db.changes({ live: true, since: "now" }).on("change", fn);

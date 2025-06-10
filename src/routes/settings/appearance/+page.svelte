@@ -4,7 +4,7 @@
 	import { padding } from "../../Navbar.svelte";
 </script>
 
-<div class="container">
+<div class="flexcol">
 	<h2>Appearance</h2>
 	<p class="secondary">Customise the appearance of the application.</p>
 	<hr />
@@ -18,15 +18,3 @@
 		/>
 	</label>
 </div>
-
-<style lang="scss">
-	.container {
-		flex-direction: column;
-		display: flex;
-		gap: 10px;
-	}
-
-	hr {
-		margin: 10px 0;
-	}
-</style>

@@ -10,7 +10,7 @@
 	const request = () => spinner(navigator.storage.persist()).then(persistent.set);
 </script>
 
-<div class="container">
+<div class="flexcol">
 	<h2>Storage</h2>
 	<p class="secondary">
 		Data retention is handled by your browser, this could result in data being arbitrarily lost.
@@ -41,16 +41,6 @@
 </div>
 
 <style lang="scss">
-	.container {
-		flex-direction: column;
-		display: flex;
-		gap: 10px;
-	}
-
-	hr {
-		margin: 10px 0;
-	}
-
 	.usage {
 		font-size: 14px;
 	}
