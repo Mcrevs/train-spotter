@@ -21,11 +21,11 @@
 	});
 
 	function save() {
-		spinner(db.put(sighting));
+		if (sighting !== "not-found") spinner(db.put(sighting));
 	}
 
 	async function remove() {
-		if (confirm("Are you sure you want to delete this sighting?")) {
+		if (sighting !== "not-found" && confirm("Are you sure you want to delete this sighting?")) {
 			await spinner(db.remove(sighting));
 			goto("/sightings");
 		}

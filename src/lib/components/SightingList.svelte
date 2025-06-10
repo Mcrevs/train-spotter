@@ -16,7 +16,7 @@
 		});
 
 		days = Object.entries(
-			Object.groupBy<number, SightingDoc>(result.docs, (i) => {
+			Object.groupBy(result.docs as SightingDoc[], (i) => {
 				const day = new Date(Number(i.time));
 				day.setHours(0);
 				day.setMinutes(0);
@@ -36,15 +36,19 @@
 </script>
 
 <div class="list">
-	{#each days as [day, sightings]}
-		<div class="heading">{day}</div>
-		{#each sightings as sighting}
-			<a class="sighting" href="/sightings/{sighting._id}">
-				<span>{sighting.identification}</span>
-				<span class="location">{sighting.location}</span>
-			</a>
+	{#if days.length === 0}
+		<p class="center">No sightings found</p>
+	{:else}
+		{#each days as [day, sightings]}
+			<div class="heading">{day}</div>
+			{#each sightings as sighting}
+				<a class="sighting" href="/sightings/{sighting._id}">
+					<span>{sighting.identification}</span>
+					<span class="location">{sighting.location}</span>
+				</a>
+			{/each}
 		{/each}
-	{/each}
+	{/if}
 </div>
 
 <style lang="scss">
