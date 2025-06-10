@@ -29,6 +29,3 @@
 		<p class="center">No schemas found</p>
 	{/if}
 </div>
-
-<style lang="scss">
-</style>

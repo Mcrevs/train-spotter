@@ -1,6 +1,5 @@
-<script lang="ts">
+<script lang="ts" context="module">
 	import { status } from "$lib/pouchdb";
-	import Fa from "svelte-fa";
 	import {
 		faCloud,
 		faGlobe,
@@ -11,21 +10,27 @@
 		type IconDefinition,
 	} from "@fortawesome/free-solid-svg-icons";
 
+	const DISPLAY_MAP = {
+		connecting: ["Connecting", faSatelliteDish],
+		disconnected: ["Disconnected", faPlug],
+		connected: ["Connected", faGlobe],
+		outdated: ["Unsaved Changes", faStarOfLife],
+		synced: ["Synchronised", faCloud],
+		syncing: ["Synchronizing", faRotate],
+	} satisfies Record<string, [string, IconDefinition]>;
+
+	export const connection = derived(status.connection, (c) => DISPLAY_MAP[c]);
+	export const sync = derived(status.sync, (s) => DISPLAY_MAP[s]);
+</script>
+
+<script lang="ts">
+	import Fa from "svelte-fa";
+	import { derived } from "svelte/store";
+
 	export let mode: "sync" | "connection";
 	export let icon: boolean = true;
 
-	const { connection, sync } = status;
-
-	$: s = (
-		{
-			connecting: ["Connecting", faSatelliteDish],
-			disconnected: ["Disconnected", faPlug],
-			connected: ["Connected", faGlobe],
-			outdated: ["Unsaved Changes", faStarOfLife],
-			synced: ["Synchronised", faCloud],
-			syncing: ["Synchronizing", faRotate],
-		} as Record<string, [string, IconDefinition]>
-	)[mode == "sync" ? $sync : mode == "connection" ? $connection : ""];
+	$: s = mode == "sync" ? $sync : $connection;
 </script>
 
 <span>

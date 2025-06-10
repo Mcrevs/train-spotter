@@ -1,5 +1,6 @@
 <script lang="ts">
-	import ReplicationStatus from "$lib/components/ReplicationStatus.svelte";
+	import LinkList from "$lib/components/LinkList.svelte";
+	import ReplicationStatus, { connection } from "$lib/components/ReplicationStatus.svelte";
 	import {
 		faBoxArchive,
 		faChevronRight,
@@ -20,7 +21,40 @@
 <div class="flexcol">
 	<h1>Settings</h1>
 	<hr />
-	<div class="group">
+
+	<LinkList
+		items={[
+			{
+				url: "/settings/replication",
+				icon: faPlug,
+				title: "Replication",
+				info: $connection[0],
+			},
+			{
+				url: "/settings/storage",
+				icon: faBoxArchive,
+				title: "Storage",
+				info: storageUsage !== undefined ? `${storageUsage}% Used` : undefined,
+			},
+			{
+				url: "/settings/schema",
+				icon: faCube,
+				title: "Schema",
+			},
+		]}
+	/>
+
+	<LinkList
+		items={[
+			{
+				url: "/settings/appearance",
+				icon: faPalette,
+				title: "Appearance",
+			},
+		]}
+	/>
+
+	<!-- <div class="group">
 		<a href="/settings/replication">
 			<Fa icon={faPlug} />
 			<span class="title">Replication</span>
@@ -46,46 +80,5 @@
 			<span class="title">Appearance</span>
 			<span class="chevron"><Fa icon={faChevronRight} /></span>
 		</a>
-	</div>
+	</div> -->
 </div>
-
-<style lang="scss">
-	.group {
-		background-color: var(--bg-3);
-		flex-direction: column;
-		border-radius: 10px;
-		overflow: hidden;
-		display: flex;
-		gap: 1px;
-
-		a {
-			background-color: var(--bg-2);
-			justify-content: left;
-			align-items: center;
-			display: block;
-			display: flex;
-			padding: 15px;
-			width: 100%;
-			gap: 10px;
-
-			.title {
-				font-weight: 500;
-			}
-
-			.info {
-				font-size: 14px;
-				color: var(--bg-4);
-
-				&::before {
-					padding-right: 0.5rem;
-					content: "-";
-				}
-			}
-
-			.chevron {
-				margin-left: auto;
-				font-size: 14px;
-			}
-		}
-	}
-</style>
