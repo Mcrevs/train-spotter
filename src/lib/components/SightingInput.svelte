@@ -6,7 +6,7 @@
 	import { db } from "$lib/pouchdb";
 	import Fa from "svelte-fa";
 
-	const location = gettable(persist<string>("location"));
+	const location = gettable(persist<string>("location", ""));
 	let inputs: Input[] = [];
 	type Input = {
 		id: string;
@@ -41,8 +41,8 @@
 		focus(i);
 	}
 
-	async function submit() {
-		await db.bulkDocs(
+	function submit() {
+		db.bulkDocs(
 			inputs
 				.filter((i) => i.value != "")
 				.map((e) => ({
