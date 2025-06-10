@@ -1,6 +1,7 @@
 <script lang="ts">
 	import "greset";
 	import "$lib/global.scss";
+	import "$lib/theme";
 
 	import { pwaInfo } from "virtual:pwa-info";
 	import type { PageData } from "./$types";
@@ -19,7 +20,7 @@
 	<Backbar />
 {/if}
 
-<div style="overflow-x: hidden;">
+<div style="overflow-x: hidden">
 	{#key data.path}
 		<main in:fly={{ x: -200, duration: 200, delay: 200 }} out:fly={{ x: 200, duration: 200 }}>
 			<slot />

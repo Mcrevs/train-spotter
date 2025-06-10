@@ -31,7 +31,7 @@
 	{:catch}
 		<span class="alert red"><Fa icon={faXmarkCircle} /> Failed to Load Storage Estimate</span>
 	{/await}
-	<hr />
+	<br />
 	{#if $persistent}
 		<span class="alert green"><Fa icon={faCheckCircle} /> Persistent Storage Granted</span>
 	{:else}

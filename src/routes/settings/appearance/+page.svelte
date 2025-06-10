@@ -1,7 +1,13 @@
 <script lang="ts">
-	import { faArrowsLeftRightToLine, faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
+	import {
+		faArrowRotateRight,
+		faArrowsLeftRightToLine,
+		faGripLinesVertical,
+	} from "@fortawesome/free-solid-svg-icons";
 	import Slider from "$lib/components/Slider.svelte";
 	import { padding } from "../../Navbar.svelte";
+	import { accent, resetAccent } from "$lib/theme";
+	import Fa from "svelte-fa";
 </script>
 
 <div class="flexcol">
@@ -16,5 +22,11 @@
 			icons={[faGripLinesVertical, faArrowsLeftRightToLine]}
 			props={{ max: 30, step: 3 }}
 		/>
+	</label>
+	<!-- svelte-ignore a11y-label-has-associated-control -->
+	<label>
+		Accent Colour
+		<button on:click={resetAccent}><Fa icon={faArrowRotateRight} scale="0.85" /></button>
+		<Slider bind:value={$accent} props={{ max: 360 }} />
 	</label>
 </div>
