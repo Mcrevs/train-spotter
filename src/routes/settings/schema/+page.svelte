@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { SchemaDoc } from "$lib/pouchdb/types";
 	import { db, onChange } from "$lib/pouchdb";
-	import { icons } from "$lib/icons";
+	import { icons } from "$lib/util";
 	import Fa from "svelte-fa";
 
 	let schema: SchemaDoc[] = [];

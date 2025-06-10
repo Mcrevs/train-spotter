@@ -1,4 +1,6 @@
+import { type IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { writable, type Readable, type Writable } from "svelte/store";
+import * as fortawesome from "@fortawesome/free-solid-svg-icons";
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -24,3 +26,10 @@ export function persist<T>(key: string, initial?: T): Writable<T> {
 
 	return store;
 }
+
+export const icons = Object.fromEntries(
+	Object.entries(fortawesome).filter(
+		(entry): entry is [string, IconDefinition] =>
+			typeof entry[1] === "object" && "iconName" in entry[1] && "icon" in entry[1],
+	),
+);
