@@ -44,7 +44,12 @@
 			{#each sightings as sighting}
 				<a class="sighting" href="/sightings/{sighting._id}">
 					<span>{sighting.identification}</span>
-					<span class="location">{sighting.location}</span>
+					<!-- TODO: REMOVE!!! Fallback for old sightings -->
+					{#if typeof sighting.location == "string"}
+						<span class="location">{sighting.location}</span>
+					{:else}
+						<span class="location">{sighting.location.custom}</span>
+					{/if}
 				</a>
 			{/each}
 		{/each}

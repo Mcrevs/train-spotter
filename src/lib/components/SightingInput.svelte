@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { faHashtag, faFont, faTrash } from "@fortawesome/free-solid-svg-icons";
+	import { gettable, persist } from "$lib/util";
 	import { slide } from "svelte/transition";
 	import { sineIn } from "svelte/easing";
-	import { gettable, persist } from "$lib/util";
 	import { db } from "$lib/pouchdb";
 	import Fa from "svelte-fa";
 
@@ -41,16 +41,28 @@
 		focus(i);
 	}
 
-	function submit() {
+	async function submit() {
+		const geolocation = await new Promise<GeolocationCoordinates>((resolve, reject) =>
+			navigator.geolocation.getCurrentPosition((p) => resolve(p.coords), reject, {
+				enableHighAccuracy: true,
+				maximumAge: 1000 * 60,
+			}),
+		).catch(() => null);
+
+		const time = new Date().getTime();
+
 		db.bulkDocs(
 			inputs
 				.filter((i) => i.value != "")
 				.map((e) => ({
-					time: new Date().getTime(),
 					identification: e.value,
-					location: $location,
+					location: {
+						custom: $location,
+						geolocation,
+					},
 					type: "sighting",
 					_id: e.id,
+					time,
 				})),
 		);
 

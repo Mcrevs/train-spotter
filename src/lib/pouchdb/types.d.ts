@@ -2,9 +2,12 @@
 
 export type SightingDoc = PouchDB.Core.ExistingDocument<{
 	identification: string;
-	location: string;
-	time: number;
 	type: "sighting";
+	time: number;
+	location: {
+		geolocation: GeolocationCoordinates | null;
+		custom: string;
+	};
 }>;
 
 export type SchemaDoc = PouchDB.Core.ExistingDocument<{

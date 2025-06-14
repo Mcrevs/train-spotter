@@ -50,7 +50,17 @@
 		</label>
 		<label>
 			Location:
-			<input type="text" autocomplete="off" placeholder="Brighton" bind:value={sighting.location} />
+			<input
+				type="text"
+				autocomplete="off"
+				placeholder="Brighton"
+				bind:value={sighting.location.custom}
+			/>
+			{#if sighting.location.geolocation}
+				<p class="secondary">
+					{sighting.location.geolocation.latitude}° N {sighting.location.geolocation.longitude}° W
+				</p>
+			{/if}
 		</label>
 		<span style="margin-top: auto;">
 			<button class="primary" on:click={save}>Save</button>
