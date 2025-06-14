@@ -43,7 +43,7 @@
 
 	async function submit() {
 		const geolocation = await new Promise<GeolocationCoordinates>((resolve, reject) =>
-			navigator.geolocation.getCurrentPosition((p) => resolve(p.coords), reject, {
+			navigator.geolocation.getCurrentPosition((p) => resolve(p.coords.toJSON()), reject, {
 				enableHighAccuracy: true,
 				maximumAge: 1000 * 60,
 			}),
