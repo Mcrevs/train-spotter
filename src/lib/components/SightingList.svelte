@@ -1,10 +1,16 @@
+<script lang="ts" context="module">
+	export const grouping = persist("list-grouping", 20);
+</script>
+
 <script lang="ts">
 	import type { SightingDoc } from "../pouchdb/types";
 	import { db, onChange } from "$lib/pouchdb";
+	import { persist } from "$lib/util";
+	import { last } from "@melt-ui/svelte/internal/helpers";
 
 	export let limit: number | null = null;
 
-	let days: [string, SightingDoc[]][] = [];
+	let elements: [undefined | string, SightingDoc][] = [];
 
 	onChange(async () => {
 		await db.createIndex({ index: { fields: ["time", "type"] } });
@@ -15,43 +21,53 @@
 			...(limit && { limit }),
 		});
 
-		days = Object.entries(
-			Object.groupBy(result.docs as SightingDoc[], (i) => {
-				const day = new Date(Number(i.time));
-				day.setHours(0);
-				day.setMinutes(0);
-				day.setSeconds(0);
-				day.setMilliseconds(0);
-				return day.getTime();
-			}),
-		).map(([k, v]) => [
-			new Date(Number(k)).toLocaleDateString("en-uk", {
-				year: "numeric",
-				month: "long",
-				day: "numeric",
-			}),
-			v,
-		]) as [string, SightingDoc[]][];
+		const sightings = result.docs as SightingDoc[];
+		elements = sightings.map((sighting, i) => {
+			// Two days in the future to ensure the day header is added
+			let lastTime = Number(sighting.time) + 172800000;
+			if (i > 0) lastTime = Number(sightings[i - 1].time);
+
+			let seperator: undefined | string;
+			if ($grouping > 0 && (lastTime - Number(sighting.time)) / 60000 > $grouping) seperator = "---";
+
+			const lastDay = new Date(lastTime);
+			lastDay.setHours(0, 0, 0, 0);
+			const day = new Date(Number(sighting.time));
+			day.setHours(0, 0, 0, 0);
+			if (lastDay.getTime() != day.getTime())
+				seperator = day.toLocaleDateString("en-uk", {
+					year: "numeric",
+					month: "long",
+					day: "numeric",
+				});
+
+			return [seperator, sighting];
+		});
 	});
 </script>
 
 <div class="list">
-	{#if days.length === 0}
+	{#if elements.length === 0}
 		<p class="center margin-v">No sightings found</p>
 	{:else}
-		{#each days as [day, sightings]}
-			<div class="heading">{day}</div>
-			{#each sightings as sighting}
-				<a class="sighting" href="/sightings/{sighting._id}">
-					<span>{sighting.identification}</span>
-					<!-- TODO: REMOVE!!! Fallback for old sightings -->
-					{#if typeof sighting.location == "string"}
-						<span class="location">{sighting.location}</span>
-					{:else}
-						<span class="location">{sighting.location.custom}</span>
-					{/if}
-				</a>
-			{/each}
+		{#each elements as [seperator, sighting]}
+			{#if seperator}
+				{#if seperator == "---"}
+					<hr class="gap" />
+				{:else}
+					<div class="heading">{seperator}</div>
+				{/if}
+			{/if}
+
+			<a class="sighting" href="/sightings/{sighting._id}">
+				<span>{sighting.identification}</span>
+				<!-- TODO: REMOVE!!! Fallback for old sightings -->
+				{#if typeof sighting.location == "string"}
+					<span class="location">{sighting.location}</span>
+				{:else}
+					<span class="location">{sighting.location.custom}</span>
+				{/if}
+			</a>
 		{/each}
 	{/if}
 </div>
@@ -64,7 +80,7 @@
 
 		.heading {
 			grid-area: auto / 1 / auto / 3;
-			background-color: var(--bg-4);
+			background-color: var(--bg-2);
 			border-radius: 5px;
 			padding: 5px 5px;
 		}
@@ -77,6 +93,11 @@
 		.location {
 			text-align: right;
 			float: right;
+		}
+
+		hr.gap {
+			border-color: var(--bg-2);
+			margin: 3px 0;
 		}
 	}
 </style>
