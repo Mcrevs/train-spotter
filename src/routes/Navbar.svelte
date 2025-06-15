@@ -14,7 +14,12 @@
 	];
 </script>
 
-<nav style="padding-bottom: {$padding}px;">
+<script lang="ts">
+	let margin = 0;
+</script>
+
+<div style="height: {margin}px;"></div>
+<nav style="padding-bottom: {$padding}px;" bind:clientHeight={margin}>
 	{#each entries as { href, icon, label }}
 		<a {href} class:active={$page.data.path[0] == href.split("/")[1]}>
 			<Fa {icon} /><span>{label}</span>

@@ -14,7 +14,6 @@
 </script>
 
 <Loading />
-<Navbar />
 
 {#if data.path.length > 1}
 	<Backbar />
@@ -27,6 +26,8 @@
 		</main>
 	{/key}
 </div>
+
+<Navbar />
 
 <!-- PWA Metadata -->
 <svelte:head>
