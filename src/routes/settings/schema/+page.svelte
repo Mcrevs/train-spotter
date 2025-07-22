@@ -4,7 +4,7 @@
 	import { icons } from "$lib/util";
 	import Fa from "svelte-fa";
 
-	let schema: SchemaDoc[] = [];
+	let schema: SchemaDoc[] = $state([]);
 
 	onChange(async () => {
 		await db.createIndex({ index: { fields: ["type"] } });

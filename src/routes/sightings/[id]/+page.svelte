@@ -7,7 +7,7 @@
 	import { page } from "$app/state";
 	import Fa from "svelte-fa";
 
-	let sighting: SightingDoc | "not-found";
+	let sighting: SightingDoc | "not-found" = $state("not-found");
 
 	onChange(async () => {
 		await db.createIndex({ index: { fields: ["type", "_id"] } });
@@ -63,8 +63,8 @@
 			</p>
 		{/if}
 		<span style="margin-top: auto;">
-			<button class="primary" on:click={save}>Save</button>
-			<button class="secondary" on:click={remove}>Delete</button>
+			<button class="primary" onclick={save}>Save</button>
+			<button class="secondary" onclick={remove}>Delete</button>
 		</span>
 	</div>
 
