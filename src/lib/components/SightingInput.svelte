@@ -53,6 +53,14 @@
 
 		const time = new Date().getTime();
 
+		await db.createIndex({ index: { fields: ["type"] } });
+
+		const result = await db.find({
+			selector: { type: "schema" },
+			limit: 1,
+		});
+		const schemaId = (result.docs.length > 0) ? result.docs[0]._id : "";
+
 		db.bulkDocs(
 			inputs
 				.filter((i) => i.value != "")
@@ -65,6 +73,8 @@
 					type: "sighting",
 					_id: e.id,
 					time,
+					schema: schemaId,
+					fields: {},
 				})),
 		);
 
