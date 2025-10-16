@@ -18,7 +18,7 @@
 	};
 
 	// Create new inputs when there are none empty
-	run(() => {
+	$effect(() => {
 		if (!inputs.some((i) => i.value == ""))
 			inputs = [...inputs, { id: crypto.randomUUID(), value: "", simple: true, binds: {} }];
 	});
@@ -59,7 +59,7 @@
 			selector: { type: "schema" },
 			limit: 1,
 		});
-		const schemaId = (result.docs.length > 0) ? result.docs[0]._id : "";
+		const schemaId = result.docs.length > 0 ? result.docs[0]._id : "";
 
 		db.bulkDocs(
 			inputs

@@ -9,7 +9,6 @@
 
 	--a-1: oklch(0.6201 0.2364 var(--accent-hue));
 	--a-2: oklch(0.7152 0.1765 var(--accent-hue));
-	--a-2: oklch(38.948% 0.11804 var(--accent-hue));
 
 	--r-1: #ff5555;
 	--r-2: #ff8585;
@@ -89,7 +88,7 @@ a[href] {
 		--button-disabled: var(--a-2);
 		@extend %button;
 	}
-	
+
 	&.secondary {
 		--button-idle: var(--bg-3);
 		--button-active: var(--a-1);
@@ -113,7 +112,8 @@ label {
 	font-variant: small-caps;
 }
 
-p.secondary, span.secondary{
+p.secondary,
+span.secondary {
 	color: var(--bg-4);
 }
 

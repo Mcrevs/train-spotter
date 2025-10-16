@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { SchemaDefaultValue, SchemaFieldType } from "$lib/types";
 	import type { SchemaDoc } from "$lib/pouchdb/types";
 	import { spinner } from "../../../Loading.svelte";
 	import { db, onChange } from "$lib/pouchdb";
@@ -7,9 +6,6 @@
 	import { icons } from "$lib/util";
 	import { page } from "$app/state";
 	import Fa from "svelte-fa";
-	import CombBox from "$lib/components/IconSelector.svelte";
-	import { faCube } from "@fortawesome/free-solid-svg-icons";
-	import IconSelector from "$lib/components/IconSelector.svelte";
 
 	let schema: SchemaDoc | "not-found" | undefined = $state();
 
@@ -58,10 +54,6 @@
 			Name:
 			<input type="text" autocomplete="off" placeholder="new schema" bind:value={schema.name} />
 		</label>
-
-		<IconSelector
-			icon={schema.icon}
-		/>
 
 		<span style="margin-top: auto;">
 			<button class="primary" onclick={save}>Save</button>
