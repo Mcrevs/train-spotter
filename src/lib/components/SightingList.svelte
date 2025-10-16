@@ -6,7 +6,6 @@
 	import type { SightingDoc } from "../pouchdb/types";
 	import { db, onChange } from "$lib/pouchdb";
 	import { persist } from "$lib/util";
-	import { last } from "@melt-ui/svelte/internal/helpers";
 
 	interface Props {
 		limit?: number | null;
